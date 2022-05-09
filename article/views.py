@@ -11,5 +11,3 @@ def view_home(request):
     }
 
     return render(request, 'index.html', context)
-
-a = 321
