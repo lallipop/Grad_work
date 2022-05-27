@@ -1,40 +1,38 @@
 {% load static %}
 {% load catalog_extras %}
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="{% url 'home' %}">Просто магазин</a>
-  <img src="{% static 'logo.svg' %}" alt="" width="42" height="42">
-  <button class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
-          aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home' %}">
-          Главная
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img src="{% static 'logo.png' %}" alt="" width="40" height="40">
         </a>
-      </li>
-        {% include 'catalog/catalog_menu.html' %}
-    </ul>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
 
+          {% include 'catalog/catalog_menu.html' %}
+        </ul>
+      </div>
 
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <form class="form-inline col-12 col-lg-auto mb-2 mb-lg-0 me-lg-3">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
 
-    {% if user.is_authenticated %}
-        <div class="text-success">Пользователь: {{ user.get_username }}</div>
-    {% endif %}
+          {% if user.is_authenticated %}
+              <a class="px-2 text-white">Привет, {{ user.get_username }}</a>
+          {% endif %}
 
-    <a class="btn btn-outline-success my-2 my-sm-0" role="button" href="{% url 'cart:cart' %}">Корзина</a>
+          <a class="btn btn-outline-info my-2 my-sm-0 ml-2" role="button" href="{% url 'cart:cart' %}">Корзина</a>
+          <button type="button" class="btn btn-warning ml-2">Регистрация</button>
 
-    {% if user.is_authenticated %}
-        <a class="btn btn-outline-success my-2 my-sm-0" role="button" href="{% url 'logout'%}?next={{request.path}}">Выйти</a>
-    {% else %}
-        <a class="btn btn-outline-success my-2 my-sm-0" role="button" href="{% url 'login'%}?next={{request.path}}">Войти</a>
-    {% endif %}
+          {% if user.is_authenticated %}
+              <a class="btn btn-outline-light me-2 ml-2" role="button" href="{% url 'logout'%}?next={{request.path}}">Выйти</a>
+          {% else %}
+              <a class="btn btn-outline-light me-2 ml-2" role="button" href="{% url 'login'%}?next={{request.path}}">Войти</a>
+          {% endif %}
 
-
-
-  </div>
-</nav>
+      </div>
+    </nav>
